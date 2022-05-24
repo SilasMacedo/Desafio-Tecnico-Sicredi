@@ -1,0 +1,259 @@
+{
+	"info": {
+		"_postman_id": "eecc2dc4-fc83-481a-b7e3-1404c1943ab8",
+		"name": "Prova_Técnica_Sicredi S1",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "16390470"
+	},
+	"item": [
+		{
+			"name": "Consultar Restrição",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"CPF com restrição\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{host}}/api/v1/restricoes/{{cpf_1}}",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"restricoes",
+						"{{cpf_1}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Simulacoes",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Simulação cadastrada com sucesso\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});\r",
+							"\r",
+							"if (responseCode.code >= 200 && responseCode.code <= 299){\r",
+							"    var jsonData = JSON.parse(responseBody);\r",
+							"\r",
+							"    postman.setEnvironmentVariable('id', jsonData.id);\r",
+							"}\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "\r\n{\r\n    \"nome\": \"Silas Teste Sicredi\",\r\n    \"cpf\": {{cpf_1}},\r\n    \"email\": \"email@email.com\",\r\n    \"valor\": 5000,\r\n    \"parcelas\": 10,\r\n    \"seguro\": true\r\n  }\r\n\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{host}}/api/v1/simulacoes",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"simulacoes"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Consultar por CPF",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Simulação encontrada\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{host}}/api/v1/simulacoes/{{cpf_1}}",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"simulacoes",
+						"{{cpf_1}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Alterar Simulação",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Simulação alterada com sucesso\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"nome\": \"Silas Teste Sicredi\",\r\n  \"cpf\": {{cpf_1}},\r\n  \"email\": \"email@email.com\",\r\n  \"valor\": 12000,\r\n  \"parcelas\": 12,\r\n  \"seguro\": true\r\n}"
+				},
+				"url": {
+					"raw": "{{host}}/api/v1/simulacoes/{{cpf_1}}",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"simulacoes",
+						"{{cpf_1}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Consultar todas simulações",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Simulações encontradas\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{host}}/api/v1/simulacoes",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"simulacoes"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Remover simulação",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Simulação removida com sucesso\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{host}}/api/v1/simulacoes/{{id}}",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"simulacoes",
+						"{{id}}"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}
